@@ -31,6 +31,7 @@
 6. Else, server will reply with 200.
 7. If client receives error for duplicate record, record will be shown to the user
 8. If client receives 200 reply with no errors, contact form is hidden and custom thank you message is shown.
+9. Jest can be used to test server side application.
 
 ## Further-Development
 

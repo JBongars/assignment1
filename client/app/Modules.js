@@ -8,6 +8,6 @@
 (function () {
 
     "use strict";
-    angular.module("RegApp", ['ngAnimate']);
+    angular.module("RegApp", []);
 
 })();

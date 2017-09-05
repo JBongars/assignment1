@@ -10,156 +10,157 @@
 </head>
 
 <body ng-cloak>
-    <div class="col-sm-2 col-lg-4"></div>
     <div ng-controller="RegistrationCtrl as ctrl" class="col-sm-8 col-lg-4 registration-page">
-        <h1> Registration </h1>
+        <div ng-hide="ctrl.hideform == 1">
+            <h1> Registration </h1>
 
 
-        <!--Registration Form-->
-        <form name="registrationForm" ng-submit="registrationForm.$valid && ctrl.registerUser()" novalidate>
+            <!--Registration Form-->
+            <form name="registrationForm" ng-submit="registrationForm.$valid && ctrl.registerUser()" novalidate>
 
-            <!--Email-->
-            <div class="form-group">
-                <label for="email">Email address</label>
-                <input id="email" name="email" type="email" placeholder="you@domain.com" class="form-control" required ng-model="ctrl.user.email"
-                />
-                <div class="validation" data-ng-show="registrationForm.email.$touched || registrationForm.$submitted">
-                    <div data-ng-show="registrationForm.email.$error.required">
-                        <span class="glyphicon glyphicon-alert"></span> Email is mandatory.
-                    </div>
-                    <div data-ng-show="registrationForm.email.$error.email">
-                        <span class="glyphicon glyphicon-alert"></span> Email is invalid.
+                <!--Email-->
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input id="email" name="email" type="email" placeholder="you@domain.com" class="form-control" required ng-model="ctrl.user.email"
+                    />
+                    <div class="validation" data-ng-show="registrationForm.email.$touched || registrationForm.$submitted">
+                        <div data-ng-show="registrationForm.email.$error.required">
+                            <span class="glyphicon glyphicon-alert"></span> Email is mandatory.
+                        </div>
+                        <div data-ng-show="registrationForm.email.$error.email">
+                            <span class="glyphicon glyphicon-alert"></span> Email is invalid.
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!--Password-->
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input id="password" name="password" type="password" class="form-control" ng-model="ctrl.user.password" minlength="8" required
-                    ng-pattern="/^(?=.*\d)(?=.*[@#$])(?=.*[a-z])(?=.*[A-Z]).{8,}$/" />
-                <div class="validation" data-ng-show="registrationForm.password.$touched || registrationForm.$submitted">
-                    <div data-ng-show="registrationForm.password.$error.required">
-                        <span class="glyphicon glyphicon-alert"></span> Password is required.
-                    </div>
-                    <div data-ng-show="registrationForm.password.$error.minlength">
-                        <span class="glyphicon glyphicon-alert"></span> Password must be at teast 8 character long.
-                    </div>
-                    <div data-ng-show="registrationForm.password.$error.pattern">
-                        <span class="glyphicon glyphicon-alert"></span> Password must include a number, a special character
-                        (@, #, $) and both upper and lower cases.
+                <!--Password-->
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input id="password" name="password" type="password" class="form-control" ng-model="ctrl.user.password" minlength="8" required
+                        ng-pattern="/^(?=.*\d)(?=.*[@#$])(?=.*[a-z])(?=.*[A-Z]).{8,}$/" />
+                    <div class="validation" data-ng-show="registrationForm.password.$touched || registrationForm.$submitted">
+                        <div data-ng-show="registrationForm.password.$error.required">
+                            <span class="glyphicon glyphicon-alert"></span> Password is required.
+                        </div>
+                        <div data-ng-show="registrationForm.password.$error.minlength">
+                            <span class="glyphicon glyphicon-alert"></span> Password must be at teast 8 character long.
+                        </div>
+                        <div data-ng-show="registrationForm.password.$error.pattern">
+                            <span class="glyphicon glyphicon-alert"></span> Password must include a number, a special character
+                            (@, #, $) and both upper and lower cases.
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!--Confirm Password-->
-            <div class="form-group">
-                <label for="confirmPassword">Confirm Password</label>
-                <input id="confirmPassword" name="confirmPassword" type="password" class="form-control" ng-model="ctrl.user.confirmPassword"
-                    required ng-required="ctrl.user.password" />
-                <div class="validation" data-ng-show="registrationForm.confirmPassword.$touched || registrationForm.$submitted">
-                    <div data-ng-show="registrationForm.confirmPassword.$error.required">
-                        <span class="glyphicon glyphicon-alert"></span> Password is required.
-                    </div>
-                    <div data-ng-show="ctrl.user.password != ctrl.user.confirmPassword">
-                        <span class="glyphicon glyphicon-alert"></span> Password do not match.
-                    </div>
-                </div>
-            </div>
-
-            <!--Full Name-->
-            <div class="form-group">
-                <label for="fullname">Full Name</label>
-                <input id="fullname" name="fullname" type="text" class="form-control" required ng-model="ctrl.user.fullname" />
-                <div class="validation" data-ng-show="registrationForm.fullname.$touched || registrationForm.$submitted">
-                    <div data-ng-show="registrationForm.fullname.$error.required">
-                        <span class="glyphicon glyphicon-alert"></span> Fullname is required.
+                <!--Confirm Password-->
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input id="confirmPassword" name="confirmPassword" type="password" class="form-control" ng-model="ctrl.user.confirmPassword"
+                        required ng-required="ctrl.user.password" />
+                    <div class="validation" data-ng-show="registrationForm.confirmPassword.$touched || registrationForm.$submitted">
+                        <div data-ng-show="registrationForm.confirmPassword.$error.required">
+                            <span class="glyphicon glyphicon-alert"></span> Password is required.
+                        </div>
+                        <div data-ng-show="ctrl.user.password != ctrl.user.confirmPassword">
+                            <span class="glyphicon glyphicon-alert"></span> Password do not match.
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!--Gender-->
-            <div class="form-group">
-                <label for="gender">Gender</label>
-                <br/>
-                <input id="gender" name="gender" ng-model="ctrl.user.gender" type="radio" value="M" /> Male
-                <br/>
-                <input id="gender" name="gender" ng-model="ctrl.user.gender" type="radio" value="F" /> Female
-                <br/>
-                <div class="validation" data-ng-show="registrationForm.gender.$touched || registrationForm.$submitted">
+                <!--Full Name-->
+                <div class="form-group">
+                    <label for="fullname">Full Name</label>
+                    <input id="fullname" name="fullname" type="text" class="form-control" required ng-model="ctrl.user.fullname" />
+                    <div class="validation" data-ng-show="registrationForm.fullname.$touched || registrationForm.$submitted">
+                        <div data-ng-show="registrationForm.fullname.$error.required">
+                            <span class="glyphicon glyphicon-alert"></span> Fullname is required.
+                        </div>
+                    </div>
+                </div>
+
+                <!--Gender-->
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <br/>
+                    <input id="gender" name="gender" ng-model="ctrl.user.gender" type="radio" value="M" /> Male
+                    <br/>
+                    <input id="gender" name="gender" ng-model="ctrl.user.gender" type="radio" value="F" /> Female
+                    <br/>
+                    <div class="validation" data-ng-show="registrationForm.gender.$touched || registrationForm.$submitted">
                         <div data-ng-show="registrationForm.gender.$error.required">
                             <span class="glyphicon glyphicon-alert"></span> Date of Birth is required.
                         </div>
-                </div>
-            </div>
-
-            <!--Date of Birth-->
-            <div class="form-group">
-                <label for="dateOfBirth">Date of Birth</label>
-                <input id="dateOfBirth" name="dateOfBirth" type="date" class="form-control" ng-model="ctrl.user.dateofbirth" />
-                <div class="validation" data-ng-show="registrationForm.dateOfBirth.$touched || registrationForm.$submitted">
-                    <div data-ng-show="registrationForm.dateOfBirth.$error.required">
-                        <span class="glyphicon glyphicon-alert"></span> Date of Birth is required.
-                    </div>
-                    <div data-ng-show="registrationForm.dateOfBirth.$error.required">
-                        <span class="glyphicon glyphicon-alert"></span> You must be at least 18 years old to register.
                     </div>
                 </div>
-            </div>
 
-            <!--Address-->
-            <div class="form-group">
-                <label for="address">Address</label>
-                <input id="address" name="address" type="text" class="form-control" ng-model="ctrl.user.address" required />
-                <div class="validation" data-ng-show="registrationForm.address.$touched || registrationForm.$submitted">
-                    <div data-ng-show="registrationForm.address.$error.required">
-                        <span class="glyphicon glyphicon-alert"></span> Address is required.
+                <!--Date of Birth-->
+                <div class="form-group">
+                    <label for="dateOfBirth">Date of Birth</label>
+                    <input id="dateOfBirth" name="dateOfBirth" type="date" class="form-control" ng-model="ctrl.user.dateofbirth" />
+                    <div class="validation" data-ng-show="registrationForm.dateOfBirth.$touched || registrationForm.$submitted">
+                        <div data-ng-show="registrationForm.dateOfBirth.$error.required">
+                            <span class="glyphicon glyphicon-alert"></span> Date of Birth is required.
+                        </div>
+                        <div data-ng-show="registrationForm.dateOfBirth.$error.required">
+                            <span class="glyphicon glyphicon-alert"></span> You must be at least 18 years old to register.
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!--Country - to be redone -->
-            <div class="form-group">
-                <label for="country">Country</label>
-                <select class="form-control" id="country" ng-model="ctrl.user.country" required>
-                            <option value="1">Singaporean</option>
-                            <option value="2">Malaysian</option>
-                            <option value="3">Thai</option>
-                        </select>
-                <div class="validation" data-ng-show="registrationForm.country.$touched || registrationForm.$submitted">
-                    <div data-ng-show="registrationForm.country.$error.required">
-                        <span class="glyphicon glyphicon-alert"></span> Country is required.
+                <!--Address-->
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input id="address" name="address" type="text" class="form-control" ng-model="ctrl.user.address" required />
+                    <div class="validation" data-ng-show="registrationForm.address.$touched || registrationForm.$submitted">
+                        <div data-ng-show="registrationForm.address.$error.required">
+                            <span class="glyphicon glyphicon-alert"></span> Address is required.
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!--Contact Number-->
-            <div class="form-group">
-                <label for="contactNumber">Contact number</label>
-                <input id="contactNumber" name="contactNumber" type="text" class="form-control" ng-model="ctrl.user.contactnumber" required
-                    ng-pattern="/^[+()-\d\s]*$/" minlength="8"/>
-                <div class="validation" data-ng-show="registrationForm.contactNumber.$touched || registrationForm.$submitted">
-                    <div data-ng-show="registrationForm.contactNumber.$error.required">
-                        <span class="glyphicon glyphicon-alert"></span> Phone number is required is required.
-                    </div>
-                    <div data-ng-show="registrationForm.contactNumber.$error.pattern">
-                        <span class="glyphicon glyphicon-alert"></span> Phone number can only contain numbers and special
-                        characters <br/>
-                        e.g. +, -, (, ), space.
-                    </div>
-                    <div data-ng-show="registrationForm.contactNumber.$error.minlength">
-                        <span class="glyphicon glyphicon-alert"></span> Please enter a valid phone number
+                <!--Country - to be redone -->
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <select class="form-control" id="country" ng-model="ctrl.user.country" required>
+                    <option value="1" ng-repeat="country in ctrl.countries">{{country}}</option>
+                </select>
+                    <div class="validation" data-ng-show="registrationForm.country.$touched || registrationForm.$submitted">
+                        <div data-ng-show="registrationForm.country.$error.required">
+                            <span class="glyphicon glyphicon-alert"></span> Country is required.
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!--Submit button-->
-            <div class="form-group">
-                <hr/>
-                <input id="submit" name="submit" type="submit" class="btn btn-success" />
-            </div>
+                <!--Contact Number-->
+                <div class="form-group">
+                    <label for="contactNumber">Contact number</label>
+                    <input id="contactNumber" name="contactNumber" type="text" class="form-control" ng-model="ctrl.user.contactnumber" required
+                        ng-pattern="/^[+()-\d\s]*$/" minlength="8" />
+                    <div class="validation" data-ng-show="registrationForm.contactNumber.$touched || registrationForm.$submitted">
+                        <div data-ng-show="registrationForm.contactNumber.$error.required">
+                            <span class="glyphicon glyphicon-alert"></span> Phone number is required is required.
+                        </div>
+                        <div data-ng-show="registrationForm.contactNumber.$error.pattern">
+                            <span class="glyphicon glyphicon-alert"></span> Phone number can only contain numbers and special
+                            characters <br/> e.g. +, -, (, ), space.
+                        </div>
+                        <div data-ng-show="registrationForm.contactNumber.$error.minlength">
+                            <span class="glyphicon glyphicon-alert"></span> Please enter a valid phone number
+                        </div>
+                    </div>
+                </div>
 
-        </form>
+                <!--Submit button-->
+                <div class="form-group">
+                    <hr/>
+                    <input id="submit" name="submit" type="submit" class="btn btn-success" />
+                </div>
+
+            </form>
+        </div>
+        <div ng-show="ctrl.showty == 1">
+            <h1>Thank You!</h1>
+        </div>
     </div>
 
 

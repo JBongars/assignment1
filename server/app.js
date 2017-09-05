@@ -30,7 +30,7 @@ if (!NODE_PORT) {
 
 var users = []; //object of users
 
-var model =     {
+var template = {
     "email": "",
     "password": "",
     "confirmPassword": "",
@@ -63,9 +63,9 @@ app.post('/register', function (req, res) {
         email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(request.email),
         password: /^(?=.*\d)(?=.*[@#$])(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(request.password),
         confirmPassword: request.password == request.confirmPassword,
-        
+
         //https://stackoverflow.com/questions/7091130/how-can-i-validate-that-someone-is-over-18-from-their-date-of-birth
-        dateofbirth: (function(DOB){
+        dateofbirth: (function (DOB) {
             var today = new Date();
             var birthDate = new Date(DOB);
             var age = today.getFullYear() - birthDate.getFullYear();
@@ -75,31 +75,35 @@ app.post('/register', function (req, res) {
             }
             return age >= 18;
         })(request.dateofbirth),
-        
-        requiredFields: (function(request){
-            function hasSameProps( obj1, obj2 ) {
-                var obj1Props = Object.keys( obj1 ),
-                    obj2Props = Object.keys( obj2 );
-            
-                if ( obj1Props.length == obj2Props.length ) {
-                    return obj1Props.every( function( prop ) {
-                      return obj2Props.indexOf( prop ) >= 0;
-                    });
-                }
-                return false;
+
+        requiredFields: (function hasSameProps(obj1, obj2) {
+            var obj1Props = Object.keys(obj1),
+                obj2Props = Object.keys(obj2);
+
+            if (obj1Props.length == obj2Props.length) {
+                return obj1Props.every(function (prop) {
+                    return obj2Props.indexOf(prop) >= 0;
+                });
             }
-        })(request, model)
+            return false;
+        })(request, template),
+
+        duplicateRecord: (function isAlreadyInDb(table, entry) {
+            var value = true;
+            for(var i in table) {
+                value *= !(table[i].email == entry.email); //based on email only
+            }
+            return value;
+        })(users, request)
     }
 
     //check validation
     var valid = true;
-    for(var i in validation){
+    for (var i in validation) {
         valid *= validation[i];
-        console.log("valid: " + valid);
-        console.log(i + " :" + validation[i]);
     }
-    
-    if(valid){
+
+    if (valid) {
         request.id = uuidv4(); //get random id
         users.push(request)
         res.status(200).json(users);
@@ -108,7 +112,6 @@ app.post('/register', function (req, res) {
         res.status(400).json(validation);
     }
 });
-
 
 app.use(function (req, res) {
     //console.log("Error: 404");

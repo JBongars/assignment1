@@ -20,4 +20,16 @@ describe('Test no end point found', function() {
     });
 });
 
-
+/*
+var template = {
+	"email":"julienbongars23@gmail.com",
+	"password":"aslkdfjlaskdjfljd204832JLKSJFKL@#)$)(",
+	"confirmPassword":"aslkdfjlaskdjfljd204832JLKSJFKL@#)$)(",
+	"fullname":"Julien Bongars",
+	"gender":"M",
+	"dateofbirth":"1990-09-20T16:00:00.000Z",
+	"address":"754 Yishun Street 72, #12-500",
+	"country":"1",
+	"contactnumber": "423452352354"
+}
+*/

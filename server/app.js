@@ -53,6 +53,7 @@ function uuidv4() {
 //handle register info
 app.post('/register', function (req, res) {
     var request = req.body;
+    console.log(JSON.stringify(request));
     var date = new Date();
 
     //server side validation
@@ -106,7 +107,7 @@ app.post('/register', function (req, res) {
     if (valid) {
         request.id = uuidv4(); //get random id
         users.push(request)
-        res.status(200).json(users);
+        res.status(200);//.json(users);
     } else {
         console.log(JSON.stringify(validation));
         res.status(400).json(validation);

@@ -8,6 +8,7 @@
 (function () {
 
     "use strict";
-    angular.module("RegApp", []);
+
+    angular.module("RegApp", ['RegApp.directives']);
 
 })();

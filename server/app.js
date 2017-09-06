@@ -54,7 +54,6 @@ function uuidv4() {
 app.post('/register', function (req, res) {
     var request = req.body;
     console.log(JSON.stringify(request));
-    var date = new Date();
 
     //server side validation
     var validation = {
@@ -65,7 +64,6 @@ app.post('/register', function (req, res) {
         password: /^(?=.*\d)(?=.*[@#$])(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(request.password),
         confirmPassword: request.password == request.confirmPassword,
 
-        //https://stackoverflow.com/questions/7091130/how-can-i-validate-that-someone-is-over-18-from-their-date-of-birth
         dateofbirth: (function (DOB) {
             var today = new Date();
             var birthDate = new Date(DOB);
@@ -91,12 +89,14 @@ app.post('/register', function (req, res) {
 
         duplicateRecord: (function isAlreadyInDb(table, entry) {
             var value = true;
-            for(var i in table) {
+            for (var i in table) {
                 value *= !(table[i].email == entry.email); //based on email only
             }
             return value;
         })(users, request)
     }
+
+    console.log(JSON.stringify(validation));
 
     //check validation
     var valid = true;
@@ -104,10 +104,12 @@ app.post('/register', function (req, res) {
         valid *= validation[i];
     }
 
-    if (valid) {
+    console.log(valid);
+
+    if (valid == 1) {
         request.id = uuidv4(); //get random id
         users.push(request)
-        res.status(200);//.json(users);
+        res.status(200).json(request);//.json(users);
     } else {
         console.log(JSON.stringify(validation));
         res.status(400).json(validation);

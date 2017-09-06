@@ -56,12 +56,9 @@
                 <div class="form-group">
                     <label for="confirmPassword">Confirm Password</label>
                     <input id="confirmPassword" name="confirmPassword" type="password" class="form-control" ng-model="ctrl.user.confirmPassword"
-                        required ng-required="ctrl.user.password" />
+                        required />
                     <div class="validation" data-ng-show="registrationForm.confirmPassword.$touched || registrationForm.$submitted">
-                        <div data-ng-show="registrationForm.confirmPassword.$error.required">
-                            <span class="glyphicon glyphicon-alert"></span> Password is required.
-                        </div>
-                        <div data-ng-show="ctrl.user.password != ctrl.user.confirmPassword">
+                        <div data-ng-show="ctrl.user.password != ctrl.user.confirmPassword || registrationForm.confirmPassword.$error.required">
                             <span class="glyphicon glyphicon-alert"></span> Password do not match.
                         </div>
                     </div>
@@ -82,13 +79,13 @@
                 <div class="form-group">
                     <label for="gender">Gender</label>
                     <br/>
-                    <input id="gender" name="gender" ng-model="ctrl.user.gender" type="radio" value="M" /> Male
+                    <input id="gender" name="gender" ng-model="ctrl.user.gender" type="radio" value="M" required /> Male
                     <br/>
-                    <input id="gender" name="gender" ng-model="ctrl.user.gender" type="radio" value="F" /> Female
+                    <input id="gender" name="gender" ng-model="ctrl.user.gender" type="radio" value="F" required /> Female
                     <br/>
                     <div class="validation" data-ng-show="registrationForm.gender.$touched || registrationForm.$submitted">
                         <div data-ng-show="registrationForm.gender.$error.required">
-                            <span class="glyphicon glyphicon-alert"></span> Date of Birth is required.
+                            <span class="glyphicon glyphicon-alert"></span> Gender is required.
                         </div>
                     </div>
                 </div>
@@ -96,12 +93,12 @@
                 <!--Date of Birth-->
                 <div class="form-group">
                     <label for="dateOfBirth">Date of Birth</label>
-                    <input id="dateOfBirth" name="dateOfBirth" type="date" class="form-control" ng-model="ctrl.user.dateofbirth" />
+                    <input id="dateOfBirth" name="dateOfBirth" type="date" class="form-control" ng-model="ctrl.user.dateofbirth" ng-max="ctrl.minAge" required/>
                     <div class="validation" data-ng-show="registrationForm.dateOfBirth.$touched || registrationForm.$submitted">
                         <div data-ng-show="registrationForm.dateOfBirth.$error.required">
                             <span class="glyphicon glyphicon-alert"></span> Date of Birth is required.
                         </div>
-                        <div data-ng-show="registrationForm.dateOfBirth.$error.required">
+                        <div data-ng-show="registrationForm.dateOfBirth.$error.max">
                             <span class="glyphicon glyphicon-alert"></span> You must be at least 18 years old to register.
                         </div>
                     </div>
@@ -121,9 +118,9 @@
                 <!--Country - to be redone -->
                 <div class="form-group">
                     <label for="country">Country</label>
-                    <select class="form-control" id="country" ng-model="ctrl.user.country" required>
-                    <option value="1" ng-repeat="country in ctrl.countries">{{country}}</option>
-                </select>
+                    <select name="country" class="form-control" id="country" ng-model="ctrl.user.country" required>
+                        <option ng-value="country" ng-repeat="country in ctrl.countries">{{country}}</option>
+                    </select>
                     <div class="validation" data-ng-show="registrationForm.country.$touched || registrationForm.$submitted">
                         <div data-ng-show="registrationForm.country.$error.required">
                             <span class="glyphicon glyphicon-alert"></span> Country is required.
@@ -168,12 +165,19 @@
         </div>
     </div>
 
-
+    <!--Components-->
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/bower_components/angular/angular.min.js"></script>
+
+    <!--Modules-->
     <script src="/app/Modules.js"></script>
-    <script src="/app/MainCtrl.js"></script>
+
+    <!--Controllers-->
+    <script src="/app/Registration/Mainctrl.js"></script>
+
+    <!--Directives-->
+    <script src="/app/Registration/checkpw.directive.js"></script>
 
 </body>
 

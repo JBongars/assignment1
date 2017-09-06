@@ -21,7 +21,7 @@
                 <!--Email-->
                 <div class="form-group">
                     <label for="email">Email address</label>
-                    <input id="email" name="email" type="email" placeholder="you@domain.com" class="form-control" required ng-model="ctrl.user.email"
+                    <input id="email" name="email" type="email" placeholder="you@domain.com" class="form-control" required ng-model="user.email"
                     />
                     <div class="validation" data-ng-show="registrationForm.email.$touched || registrationForm.$submitted">
                         <div data-ng-show="registrationForm.email.$error.required">
@@ -36,7 +36,7 @@
                 <!--Password-->
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input id="password" name="password" type="password" class="form-control" ng-model="ctrl.user.password" minlength="8" required
+                    <input id="password" name="password" type="password" class="form-control" ng-model="user.password" minlength="8" required
                         ng-pattern="/^(?=.*\d)(?=.*[@#$])(?=.*[a-z])(?=.*[A-Z]).{8,}$/" />
                     <div class="validation" data-ng-show="registrationForm.password.$touched || registrationForm.$submitted">
                         <div data-ng-show="registrationForm.password.$error.required">
@@ -55,10 +55,11 @@
                 <!--Confirm Password-->
                 <div class="form-group">
                     <label for="confirmPassword">Confirm Password</label>
-                    <input id="confirmPassword" name="confirmPassword" type="password" class="form-control" ng-model="ctrl.user.confirmPassword"
-                        required />
+                    <input id="confirmPassword" name="confirmPassword" type="password" class="form-control" ng-model="user.confirmPassword"
+                        pw-check="password" required />
+
                     <div class="validation" data-ng-show="registrationForm.confirmPassword.$touched || registrationForm.$submitted">
-                        <div data-ng-show="ctrl.user.password != ctrl.user.confirmPassword || registrationForm.confirmPassword.$error.required">
+                        <div data-ng-show="registrationForm.confirmPassword.$error.pwmatch || registrationForm.confirmPassword.$error.required">
                             <span class="glyphicon glyphicon-alert"></span> Password do not match.
                         </div>
                     </div>
@@ -67,7 +68,7 @@
                 <!--Full Name-->
                 <div class="form-group">
                     <label for="fullname">Full Name</label>
-                    <input id="fullname" name="fullname" type="text" class="form-control" required ng-model="ctrl.user.fullname" />
+                    <input id="fullname" name="fullname" type="text" class="form-control" required ng-model="user.fullname" />
                     <div class="validation" data-ng-show="registrationForm.fullname.$touched || registrationForm.$submitted">
                         <div data-ng-show="registrationForm.fullname.$error.required">
                             <span class="glyphicon glyphicon-alert"></span> Fullname is required.
@@ -79,9 +80,9 @@
                 <div class="form-group">
                     <label for="gender">Gender</label>
                     <br/>
-                    <input id="gender" name="gender" ng-model="ctrl.user.gender" type="radio" value="M" required /> Male
+                    <input id="gender" name="gender" ng-model="user.gender" type="radio" value="M" required /> Male
                     <br/>
-                    <input id="gender" name="gender" ng-model="ctrl.user.gender" type="radio" value="F" required /> Female
+                    <input id="gender" name="gender" ng-model="user.gender" type="radio" value="F" required /> Female
                     <br/>
                     <div class="validation" data-ng-show="registrationForm.gender.$touched || registrationForm.$submitted">
                         <div data-ng-show="registrationForm.gender.$error.required">
@@ -93,7 +94,7 @@
                 <!--Date of Birth-->
                 <div class="form-group">
                     <label for="dateOfBirth">Date of Birth</label>
-                    <input id="dateOfBirth" name="dateOfBirth" type="date" class="form-control" ng-model="ctrl.user.dateofbirth" ng-max="ctrl.minAge" required/>
+                    <input id="dateOfBirth" name="dateOfBirth" type="date" class="form-control" ng-model="user.dateofbirth" ng-max="ctrl.minAge" required/>
                     <div class="validation" data-ng-show="registrationForm.dateOfBirth.$touched || registrationForm.$submitted">
                         <div data-ng-show="registrationForm.dateOfBirth.$error.required">
                             <span class="glyphicon glyphicon-alert"></span> Date of Birth is required.
@@ -107,7 +108,7 @@
                 <!--Address-->
                 <div class="form-group">
                     <label for="address">Address</label>
-                    <input id="address" name="address" type="text" class="form-control" ng-model="ctrl.user.address" required />
+                    <input id="address" name="address" type="text" class="form-control" ng-model="user.address" required />
                     <div class="validation" data-ng-show="registrationForm.address.$touched || registrationForm.$submitted">
                         <div data-ng-show="registrationForm.address.$error.required">
                             <span class="glyphicon glyphicon-alert"></span> Address is required.
@@ -118,7 +119,7 @@
                 <!--Country - to be redone -->
                 <div class="form-group">
                     <label for="country">Country</label>
-                    <select name="country" class="form-control" id="country" ng-model="ctrl.user.country" required>
+                    <select name="country" class="form-control" id="country" ng-model="user.country" required>
                         <option ng-value="country" ng-repeat="country in ctrl.countries">{{country}}</option>
                     </select>
                     <div class="validation" data-ng-show="registrationForm.country.$touched || registrationForm.$submitted">
@@ -131,7 +132,7 @@
                 <!--Contact Number-->
                 <div class="form-group">
                     <label for="contactNumber">Contact number</label>
-                    <input id="contactNumber" name="contactNumber" type="text" class="form-control" ng-model="ctrl.user.contactnumber" required
+                    <input id="contactNumber" name="contactNumber" type="text" class="form-control" ng-model="user.contactnumber" required
                         ng-pattern="/^[+()-\d\s]*$/" minlength="8" />
                     <div class="validation" data-ng-show="registrationForm.contactNumber.$touched || registrationForm.$submitted">
                         <div data-ng-show="registrationForm.contactNumber.$error.required">

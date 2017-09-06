@@ -18,8 +18,15 @@
           var firstPassword = '#' + attrs.pwCheck;
           elem.add(firstPassword).on('keyup', function () {
             scope.$apply(function () {
-              var v = elem.val()===$(firstPassword).val();
+
+                var elem1 = elem.val();
+                var elem2 = $(firstPassword).val();
+
+                //console.log(elem1 == elem2);
+
+              var v = elem1 == elem2;
               ctrl.$setValidity('pwmatch', v);
+
             });
           });
         }
